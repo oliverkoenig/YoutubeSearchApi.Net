@@ -11,7 +11,7 @@ namespace YoutubeSearchApi.Net.Demo
 {
     internal class YoutubeSearch_DI_Demo
     {
-        public static void Main(string[] args) => AsyncMain(args).GetAwaiter().GetResult();
+        //public static void Main(string[] args) => AsyncMain(args).GetAwaiter().GetResult();
 
         internal static Task AsyncMain(string[] args)
         {

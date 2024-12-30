@@ -76,7 +76,7 @@ namespace YoutubeSearchApi.Net.Services
                     element = (JObject)flexColumns.Last();
                     string duration = element["text"].Value<string>();
 
-                    var video = new YoutubeVideo(videoId, $"{WATCH_URL_PREFIX}{videoId}", title, "#", duration, author);
+                    var video = new YoutubeVideo(videoId, $"{WATCH_URL_PREFIX}{videoId}", title, "#", duration, author, "");
                     videos.Add(video);
                 }
             }

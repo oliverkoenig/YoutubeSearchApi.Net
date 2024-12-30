@@ -14,7 +14,7 @@ namespace YoutubeSearchApi.Net.Demo
             {
                 YoutubeSearchClient client = new YoutubeSearchClient(httpClient);
 
-                var responseObject = await client.SearchAsync("search terms");
+                var responseObject = await client.SearchAsync("Syl Johnson - come together");
 
                 foreach (YoutubeVideo video in responseObject.Results)
                 {

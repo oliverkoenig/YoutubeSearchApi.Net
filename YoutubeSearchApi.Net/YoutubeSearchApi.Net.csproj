@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-    <Version>1.1.1</Version>
+    <Version>1.2.0-alpha.1</Version>
     <Description>A lightweight &amp; simple .NET library to extract data from Youtube or any sources</Description>
-    <Authors>yeogaa</Authors>
+    <Authors>yeogaa, okxsoft.de</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Company>yeogaa</Company>
+    <Company>yeogaa, okxsoft.de</Company>
     <Product>YoutubeSearchApi.Net</Product>
     <PackageProjectUrl>https://github.com/madeyoga/YoutubeSearchApi.Net</PackageProjectUrl>
     <PackageIcon></PackageIcon>
@@ -14,10 +14,10 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>youtube,youtube-music,youtube-search,youtube-search-api,youtube-music-search</PackageTags>
     <PackageReleaseNotes>multi target frameworks</PackageReleaseNotes>
-    <Copyright>yeogaa</Copyright>
+    <Copyright>yeogaa, okxsoft.de</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <AssemblyVersion>1.1.1</AssemblyVersion>
-    <FileVersion>1.1.1</FileVersion>
+    <AssemblyVersion>1.2.0</AssemblyVersion>
+    <FileVersion>1.2.0-alpha.1</FileVersion>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -26,7 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

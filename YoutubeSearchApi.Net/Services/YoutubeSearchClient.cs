@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using YoutubeSearchApi.Net.Exceptions;
@@ -57,20 +58,13 @@ namespace YoutubeSearchApi.Net.Services
             };
         }
 
-        private List<YoutubeVideo> ParseData(string pageContent)
+        internal List<YoutubeVideo> ParseData(string pageContent)
         {
-            // Get index of start feature + startFeature.Length + 3 
-            // to get rid of the startFeature text and the " = " (Get only the Json object)
-            int startIndex = pageContent.IndexOf(startFeature) + startFeature.Length + 3;
+            int startIndex = Regex.Match(pageContent, "{\\s*\"responseContext\"").Index;
+            int endIndex = Regex.Match(pageContent, "\"targetId\":\\s*\"search-page\"\\s*}", RegexOptions.RightToLeft).Index;
+            //pageContent.IndexOf("\"targetId\":\"search-feed\"}}}}", startIndex) + 4;
 
-            // Define startIndex To end page string
-            string startIndexToEndPage = pageContent.Substring(startIndex, pageContent.Length - startIndex);
-
-            // And get the first endFeature occurance. endFeature: "};".
-            // index + 1 to get the close curly bracket
-            int endIndex = startIndexToEndPage.IndexOf("};") + 1;
-
-            string jsonString = startIndexToEndPage.Substring(0, endIndex);
+            string jsonString = pageContent.Substring(startIndex, endIndex - startIndex);
 
             JObject jsonObject = JObject.Parse(jsonString);
 
@@ -101,7 +95,9 @@ namespace YoutubeSearchApi.Net.Services
 
                     string videoAuthor = videoRenderer["longBylineText"]["runs"][0]["text"].Value<string>();
 
-                    YoutubeVideo youtubeVideo = new YoutubeVideo(videoId, videoUri, videoTitle, videoThumbnailUrl, videoDuration, videoAuthor);
+                    var videoDescription = videoRenderer["detailedMetadataSnippets"][0]["snippetText"]["runs"][0]["text"].Value<string>();
+
+                    YoutubeVideo youtubeVideo = new YoutubeVideo(videoId, videoUri, videoTitle, videoThumbnailUrl, videoDuration, videoAuthor, videoDescription);
                     videos.Add(youtubeVideo);
                 }
             }

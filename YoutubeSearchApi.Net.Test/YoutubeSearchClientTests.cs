@@ -9,7 +9,8 @@ public class YoutubeSearchClientTests
     {
         var json = GetTestData("YoutubeSearchResponse.json");
         var client = new YoutubeSearchClient(new HttpClient());
-        client.ParseData(json);
+        var videos = client.ParseData(json);
+        var descriptions = videos.Select(v => v.Description).ToList();
     }
 
     [Fact]
@@ -17,7 +18,7 @@ public class YoutubeSearchClientTests
     {
         var html = GetTestData("YoutubeSearchResponse.html");
         var client = new YoutubeSearchClient(new HttpClient());
-        client.ParseData(html);
+        var videos = client.ParseData(html);
     }
 
     private static string GetTestData(string fileName)

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -94,7 +95,9 @@ namespace YoutubeSearchApi.Net.Services
 
                     string videoAuthor = videoRenderer["longBylineText"]["runs"][0]["text"].Value<string>();
 
-                    var videoDescription = videoRenderer["detailedMetadataSnippets"][0]["snippetText"]["runs"][0]["text"].Value<string>();
+                    var videoDescription = videoRenderer["detailedMetadataSnippets"] != null
+                        ? string.Join("; ", videoRenderer["detailedMetadataSnippets"][0]["snippetText"]["runs"].Select( run => run["text"].Value<string>()))
+                        : "";
 
                     YoutubeVideo youtubeVideo = new YoutubeVideo(videoId, videoUri, videoTitle, videoThumbnailUrl, videoDuration, videoAuthor, videoDescription);
                     videos.Add(youtubeVideo);

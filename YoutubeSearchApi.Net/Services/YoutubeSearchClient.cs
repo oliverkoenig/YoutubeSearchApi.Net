@@ -61,9 +61,8 @@ namespace YoutubeSearchApi.Net.Services
         internal List<YoutubeVideo> ParseData(string pageContent)
         {
             int startIndex = Regex.Match(pageContent, "{\\s*\"responseContext\"").Index;
-            int endIndex = Regex.Match(pageContent, "\"targetId\":\\s*\"search-page\"\\s*}", RegexOptions.RightToLeft).Index;
-            //pageContent.IndexOf("\"targetId\":\"search-feed\"}}}}", startIndex) + 4;
-
+            var match = Regex.Match(pageContent, "\"targetId\":\\s*\"search-page\"\\s*}", RegexOptions.RightToLeft);
+            int endIndex = match.Index + match.Length;
             string jsonString = pageContent.Substring(startIndex, endIndex - startIndex);
 
             JObject jsonObject = JObject.Parse(jsonString);
